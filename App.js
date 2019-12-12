@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList, TouchableOpacity, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import Header from './components/header';
+import TodoItem from './components/todoItem';
+import AddTodo from './components/addTodo';
+import Signup from './components/signup';
 
 export default function App() {
+
   const [name, setName] = useState('vikas sharma')
   const [person, setPerson] = useState({ name: 'Joker', age: 23 })
   const clickHandler = () => {
@@ -17,6 +22,42 @@ export default function App() {
     { name: 'toad', id: '6' },
     { name: 'bowser', id: '7' },
   ]);
+
+  // const pressHandler = (id) => {
+  //   console.log(id);
+  //   setPeople((prevPeople) => {
+  //     return prevPeople.filter(person => person.id != id);
+  //   });
+  // };
+
+  const [todos, setTodos] = useState([
+    { text: 'buy coffee', key: '1' },
+    { text: 'create an app', key: '2' },
+    { text: 'play on the switch', key: '3' }
+  ]);
+
+  const pressHandler = (key) => {
+    setTodos(prevTodos => {
+      return prevTodos.filter(todo => todo.key != key);
+    });
+  };
+
+  const submitHandler = (text) => {
+    if (text.length > 3) {
+      //setText('');
+      setTodos(prevTodos => {
+        return [
+          { text: text, key: Math.random().toString() },
+          ...prevTodos
+        ];
+      });
+    } else {
+      Alert.alert('OOPS', 'Todo must be over 3 characters long', [
+        { text: 'Understood', onPress: () => console.log('alert closed') }
+      ]);
+    }
+  };
+
   return (
     // intro -->
     // <View style={styles.container}>
@@ -67,12 +108,81 @@ export default function App() {
     // </View>
 
     // Flat list --> good performance data rendeer to visible view only
-    <View style={styles.dynamicContainer}>
-      <FlatList
-        data={people}
-        renderItem={({item}) => (
-          <Text style={styles.item}>{item.name}</Text>
-        )} />
+    // <View style={styles.dynamicContainer}>
+
+    //   <FlatList 
+    //     numColumns={2}
+    //     keyExtractor={(item) => item.id} 
+    //     data={people} 
+    //     renderItem={({ item }) => ( 
+    //       <Text style={styles.item}>{item.name}</Text>
+    //     )}
+    //   />
+    // </View>
+
+    // <View style={styles.dynamicContainer}>
+
+    //   <FlatList
+    //     numColumns={2}
+    //     keyExtractor={(item) => item.id}
+    //     data={people}
+    //     renderItem={({ item }) => (
+    //       <TouchableOpacity onPress={() => pressHandler(item.id)}>
+    //         <Text style={styles.item}>{item.name}</Text>
+    //       </TouchableOpacity>
+    //     )}
+    //   />
+    // </View>
+
+    // <View style={styles.container}>
+    //   <Header />
+    //   <View style={styles.content}>
+    //     {/* add todo form */}
+    //     <View style={styles.list}>
+    //       <FlatList
+    //         data={todos}
+    //         renderItem={({ item }) => (
+    //           <Text>{item.text}</Text>
+    //         )}
+    //       />
+    //     </View>
+    //   </View>
+    // </View>
+
+    // <View style={styles.container}>
+    //   <Header />
+    //   <View style={styles.content}>
+    //     {/* add todo form */}
+    //     <View style={styles.list}>
+    //       <FlatList
+    //         data={todos}
+    //         renderItem={({ item }) => (
+    //           <TodoItem item={item} pressHandler={pressHandler} />
+    //         )}
+    //       />
+    //     </View>
+    //   </View>
+    // </View>
+
+    // <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    //   <View style={styles.container}>
+    //     <Header />
+    //     <View style={styles.content}>
+    //       <AddTodo submitHandler={submitHandler} />
+    //       <View style={styles.list}>
+    //         <FlatList
+    //           data={todos}
+    //           renderItem={({ item }) => (
+    //             <TodoItem item={item} pressHandler={pressHandler} />
+    //           )}
+    //         />
+    //       </View>
+    //     </View>
+    //   </View>
+    // </TouchableWithoutFeedback>
+
+    <View>
+      <Signup></Signup>
     </View>
   );
 }
@@ -81,8 +191,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ffd',
-    alignItems: 'center',
-    justifyContent: 'center',
+    //alignItems: 'center',
+    //justifyContent: 'center',
   },
   header: {
     backgroundColor: "pink",
@@ -117,9 +227,17 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   item: {
+    flex: 1,
+    marginHorizontal: 10,
     marginTop: 24,
-    padding: 20,
+    padding: 30,
     backgroundColor: 'pink',
-    fontSize: 18
-  }
+    fontSize: 24,
+  },
+  content: {
+    padding: 40,
+  },
+  list: {
+    marginTop: 20,
+  },
 });
