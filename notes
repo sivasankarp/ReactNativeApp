@@ -8,3 +8,1028 @@ https://github.com/bietkul/react-native-form-builder
 redux
 https://stackoverflow.com/questions/51743393/reactnative-get-values-from-redux-form
 https://www.robinwieruch.de/react-function-component
+
+
+
+
+formhome
+import React, { Component } from 'react'
+import { StyleSheet, View, ScrollView, Button, Text } from 'react-native'
+import Spinner from 'react-native-loading-spinner-overlay';
+import FormBuilder from '../utils/formbuilder';
+
+const fields =
+    [
+        {
+            "dirty": true,
+            "canHaveOptionCorrect": true,
+            "canHaveDisplayHorizontal": false,
+            "src": "https://www.motherson.com/images/logo.png",
+            "center": true,
+            "icon": "fa fa-photo",
+            "canHaveAlternateForm": false,
+            "canHavePageBreakBefore": false,
+            "type": "Image",
+            "required": false,
+            "props": {
+            },
+            "field_name": "image_88EF601C-8130-4331-B2F2-4E321D36DD7D",
+            "canHaveOptionValue": true,
+            "name": "C7AE25D6-62E1-497A-A113-FBC7AF6E1BFD",
+            "width": "180",
+            "id": "C7AE25D6-62E1-497A-A113-FBC7AF6E1BFD",
+            "text": "Image",
+            "height": "70",
+            "element": "Image"
+        },
+        {
+            "dirty": true,
+            "canHaveOptionCorrect": true,
+            "canHaveDisplayHorizontal": true,
+            "static": true,
+            "icon": "fa fa-paragraph",
+            "canHaveAlternateForm": true,
+            "canHavePageBreakBefore": true,
+            "bold": false,
+            "type": "Paragraph",
+            "italic": false,
+            "content": "<strong>Connect 1 mobile app is used to take action on workflow pending request for STARS, RAS, GRSS etc. and to view global SMG documents. Connect 1 is a mobile based console provides platform to access application(s) being used in the Samvardhana Motherson Group (SMG). It allows viewing key information from application(s) and to take certain actions. This console is available on two mobile platforms (iOS and Android). Currently this console is integrated with many workflow applications like STARS, RAS, EASY, GRSS-SMR, GRSS-SMP and RMS applications.</strong> ",
+            "required": false,
+            "props": {
+                "marginStart": 15,
+                "fontSize": 22,
+                "bold": false,
+                "italic": false,
+                "textColor": "#808080"
+            },
+            "canHaveOptionValue": true,
+            "name": "3238287B-84E8-4798-9438-A8C56D5CC5E3",
+            "id": "3238287B-84E8-4798-9438-A8C56D5CC5E3",
+            "text": "Paragraph",
+            "element": "Paragraph"
+        },
+        {
+            "dirty": true,
+            "canHaveOptionCorrect": true,
+            "canHaveDisplayHorizontal": true,
+            "icon": "fa fa-caret-square-o-down",
+            "multiple": false,
+            "canHaveAlternateForm": true,
+            "canHavePageBreakBefore": true,
+            "label": "Select Entry ",
+            "type": "Dropdown",
+            "required": false,
+            "props": {
+            },
+            "field_name": "dropdown_976CD324-AACC-4146-908F-695394E3DC16",
+            "objectType": true,
+            "canHaveOptionValue": true,
+            "canHaveAnswer": true,
+            "name": "32C2F9FB-A85D-4758-9F5F-CED891F21502",
+            "options": [
+                {
+                    "name": "Mind",
+                    "id": "1",
+                    "text": "Mind",
+                    "value": "1",
+                    "key": "dropdown_option_6DAA23D6-20D8-4F51-9543-52A2B9B6EECE"
+                },
+                {
+                    "name": "Mind2 ",
+                    "id": "2",
+                    "text": "Mind2 ",
+                    "value": "2",
+                    "key": "dropdown_option_DA99B55E-AE8B-40B9-9F5B-ABA2779D46CC"
+                },
+                {
+                    "name": "Mind 3",
+                    "id": "3",
+                    "text": "Mind 3",
+                    "value": "3",
+                    "key": "dropdown_option_7993CBB3-EC4A-46ED-B40A-E17F381E0541"
+                }
+            ],
+            "id": "32C2F9FB-A85D-4758-9F5F-CED891F21502",
+            "text": "Dropdown",
+            "labelKey": "name",
+            "element": "Dropdown",
+            "primaryKey": "key"
+        },
+        {
+            "dirty": true,
+            "canHaveOptionCorrect": true,
+            "canHaveDisplayHorizontal": true,
+            "icon": "fa fa-font",
+            "canHaveAlternateForm": true,
+            "canHavePageBreakBefore": true,
+            "label": "Enter Your Name ",
+            "type": "TextInput",
+            "required": false,
+            "props": {
+            },
+            "field_name": "text_input_4D2D4FC4-02D3-4DB3-ADFC-FB221472565B",
+            "canHaveOptionValue": true,
+            "canHaveAnswer": true,
+            "name": "77780968-0A51-47EC-8811-22F5C64F0EBA",
+            "id": "77780968-0A51-47EC-8811-22F5C64F0EBA",
+            "text": "Text Input",
+            "element": "TextInput"
+        },
+        {
+            "dirty": true,
+            "canHaveOptionCorrect": true,
+            "canHaveDisplayHorizontal": true,
+            "icon": "fa fa-font",
+            "canHaveAlternateForm": true,
+            "canHavePageBreakBefore": true,
+            "label": "Enter Description ",
+            "type": "TextInput",
+            "required": false,
+            "props": {
+            },
+            "field_name": "text_input_C43316DB-2F75-4492-8F9F-D72595600E65",
+            "canHaveOptionValue": true,
+            "canHaveAnswer": true,
+            "name": "EBD467ED-223E-42B7-A54D-8C437388FB08",
+            "id": "EBD467ED-223E-42B7-A54D-8C437388FB08",
+            "text": "Text Input",
+            "element": "TextInput"
+        },
+        {
+            "dirty": true,
+            "defaultToday": false,
+            "canHaveOptionCorrect": true,
+            "canHaveDisplayHorizontal": true,
+            "dateFormat": "MM/dd/yyyy",
+            "icon": "fa fa-calendar",
+            "canHaveAlternateForm": true,
+            "canHavePageBreakBefore": true,
+            "readOnly": false,
+            "label": "Select Date Only ",
+            "type": "DatePicker",
+            "required": false,
+            "props": {
+            },
+            "field_name": "date_picker_B87B38C1-8246-4389-86B1-0851C1F5ED87",
+            "mode": "date",
+            "showTimeSelect": false,
+            "canHaveOptionValue": true,
+            "timeFormat": "hh:mm aa",
+            "showTimeSelectOnly": false,
+            "name": "4523178F-E350-4888-B216-EC33E4ADA9D8",
+            "id": "4523178F-E350-4888-B216-EC33E4ADA9D8",
+            "text": "Date",
+            "element": "DatePicker"
+        },
+        {
+            "dirty": true,
+            "defaultToday": false,
+            "canHaveOptionCorrect": true,
+            "canHaveDisplayHorizontal": true,
+            "dateFormat": "MM/dd/yyyy",
+            "icon": "fa fa-calendar",
+            "canHaveAlternateForm": true,
+            "canHavePageBreakBefore": true,
+            "readOnly": false,
+            "label": "Select time Only ",
+            "type": "DatePicker",
+            "required": false,
+            "props": {
+            },
+            "field_name": "date_picker_7604DD2C-BABC-4AFA-A6B2-E635410F43C6",
+            "mode": "time",
+            "showTimeSelect": true,
+            "canHaveOptionValue": true,
+            "timeFormat": "hh:mm aa",
+            "showTimeSelectOnly": true,
+            "name": "7B9BD571-E2D5-4E34-B9F0-B3059C72EB8B",
+            "id": "7B9BD571-E2D5-4E34-B9F0-B3059C72EB8B",
+            "text": "Date",
+            "element": "DatePicker"
+        },
+        {
+            "dirty": true,
+            "canHaveOptionCorrect": true,
+            "canHaveDisplayHorizontal": true,
+            "icon": "fa fa-check-square-o",
+            "multiple": true,
+            "canHaveAlternateForm": true,
+            "canHavePageBreakBefore": true,
+            "label": "Select Multi Choice ",
+            "type": "Dropdown",
+            "required": false,
+            "props": {
+            },
+            "field_name": "checkboxes_58FFDE9B-F6FE-47E5-99AB-8346133F65F8",
+            "objectType": true,
+            "canHaveOptionValue": true,
+            "canHaveAnswer": true,
+            "name": "F968B037-F2BA-4676-A9C6-47323563C476",
+            "options": [
+                {
+                    "name": "select 1",
+                    "id": "1",
+                    "text": "select 1",
+                    "value": "1",
+                    "key": "checkboxes_option_B838D88E-E8DC-476F-88D9-4888A90B18BF"
+                },
+                {
+                    "name": "select 2",
+                    "id": "2",
+                    "text": "select 2",
+                    "value": "2",
+                    "key": "checkboxes_option_71F79402-062B-472D-ABA4-2DB9F5278B07"
+                },
+                {
+                    "name": "select 3",
+                    "id": "3",
+                    "text": "select 3",
+                    "value": "3",
+                    "key": "checkboxes_option_40905023-5D58-44D4-A035-8B49E4E3F11E"
+                }
+            ],
+            "id": "F968B037-F2BA-4676-A9C6-47323563C476",
+            "text": "Checkboxes",
+            "labelKey": "name",
+            "element": "Checkboxes",
+            "primaryKey": "key"
+        },
+        {
+            "dirty": true,
+            "canHaveOptionCorrect": true,
+            "canHaveDisplayHorizontal": true,
+            "icon": "fa fa-camera",
+            "canHaveAlternateForm": true,
+            "canHavePageBreakBefore": true,
+            "label": "Upload Image ",
+            "type": "Camera",
+            "required": false,
+            "props": {
+            },
+            "field_name": "camera_86F6319B-AD39-4896-93B3-C621D7F496B8",
+            "canHaveOptionValue": true,
+            "name": "B3C8A176-D298-42AA-91C5-9CCB55E10733",
+            "id": "B3C8A176-D298-42AA-91C5-9CCB55E10733",
+            "text": "Camera",
+            "element": "Camera"
+        },
+        {
+            "dirty": true,
+            "canHaveOptionCorrect": true,
+            "canHaveDisplayHorizontal": true,
+            "icon": "fa fa-plus",
+            "canHaveAlternateForm": true,
+            "canHavePageBreakBefore": true,
+            "label": "Enter Age",
+            "type": "NumberInput",
+            "required": false,
+            "props": {
+            },
+            "field_name": "number_input_1425E90F-C225-413A-9C6A-45CC66862C09",
+            "canHaveOptionValue": true,
+            "canHaveAnswer": true,
+            "name": "369E4BDD-90C0-4156-9172-A4936441E3B9",
+            "id": "369E4BDD-90C0-4156-9172-A4936441E3B9",
+            "text": "Number Input",
+            "element": "NumberInput"
+        },
+        {
+            "dirty": false,
+            "canHaveOptionCorrect": true,
+            "canHaveDisplayHorizontal": true,
+            "icon": "fa fa-font",
+            "canHaveAlternateForm": true,
+            "canHavePageBreakBefore": true,
+            "label": "Placeholder Label ",
+            "type": "TextInput",
+            "required": false,
+            "props": {
+            },
+            "field_name": "text_input_0B7DFA6E-3AA5-479F-8267-D757C4B7009C",
+            "canHaveOptionValue": true,
+            "canHaveAnswer": true,
+            "name": "0E816C55-E54D-4B1A-93AB-010BEA787C60",
+            "id": "0E816C55-E54D-4B1A-93AB-010BEA787C60",
+            "text": "Text Input",
+            "showIcon": true,
+            "element": "TextInput"
+        },
+        {
+            "type": "Picker",
+            "mode": "dropdown",
+            "enaled": "true",
+            "label": "Select Organization",
+            "options": [
+                {
+                    "name": "Mind",
+                    "id": "1",
+                    "text": "Mind",
+                    "value": "1",
+                    "key": "dropdown_option_6DAA23D6-20D8-4F51-9543-52A2B9B6EECE"
+                },
+                {
+                    "name": "Mind2 ",
+                    "id": "2",
+                    "text": "Mind2 ",
+                    "value": "2",
+                    "key": "dropdown_option_DA99B55E-AE8B-40B9-9F5B-ABA2779D46CC"
+                },
+                {
+                    "name": "Mind 3",
+                    "id": "3",
+                    "text": "Mind 3",
+                    "value": "3",
+                    "key": "dropdown_option_7993CBB3-EC4A-46ED-B40A-E17F381E0541"
+                }
+            ],
+            "id": "32C2F9FB-A85D-4758-9F5F-CED891F21501",
+            "labelKey": "name",
+            "primaryKey": "key",
+        },
+        {
+            "id": "abc",
+            "type": "Separator",
+        },
+        {
+            "id": "abcd",
+            "type": "Submit",
+            "name": "Submit"
+        }
+    ]
+
+export default class FormHome extends React.Component {
+
+    static navigationOptions = {
+        title: 'Form',
+        fontWeight: 'bold',
+    };
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            formId: this.props.navigation.getParam('formId'),
+            formName: this.props.navigation.getParam('formName'),
+            // fields: [],
+            spinner: true,
+            isDataAvailable: false
+        }
+    }
+
+    componentDidMount() {
+        this.GetData()
+    }
+
+    GetData = async () => {
+        try {
+
+            // const response = await fetch(`http://172.29.32.36:7090/api/v1/get/form/${this.state.formId}`, {
+            //     method: 'GET',
+            //     headers: {
+            //         Accept: 'application/json',
+            //         'Content-Type': 'application/json'
+            //     }
+            // });
+            const response = await fetch('https://jsonplaceholder.typicode.com/users');
+            const responseJson = await response.json();
+            console.log("responseJson.form_data")
+            console.log(responseJson.form_data)
+            this.setState({
+                // fields: responseJson.form_data,
+                spinner: false,
+                isDataAvailable: true
+            })
+        }
+        catch (error) {
+            console.error(error);
+        }
+    };
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <Spinner
+                    style={{ flex: 1 }}
+                    visible={this.state.spinner}
+                    textContent={'Loading...'}
+                    color="white"
+                />
+                <View style={{ flex: 1 }}>
+                    {
+                        this.state.isDataAvailable ? <FormBuilder
+                            fields={fields}
+                            {...this.state}
+                            {...this.props} /> : null
+                    }
+                </View>
+
+            </View>
+        )
+    }
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    },
+    submitButton: {
+        paddingHorizontal: 10,
+        paddingTop: 20,
+        width: 100,
+        justifyContent: "center",
+        alignSelf: "center"
+    },
+});
+
+formbuilder
+import React, { Component, useState } from 'react'
+import { View, Text, Button, TextInput, FlatList, TouchableOpacity, Image, Modal, Dimensions, Platform, Picker, KeyboardAvoidingView } from 'react-native'
+import { Field, reduxForm } from 'redux-form';
+import KeyboardSpacer from 'react-native-keyboard-spacer'
+import HTML from 'react-native-render-html';
+import PropTypes from 'prop-types';
+import * as ImagePicker from 'expo-image-picker';
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
+import { Container, Header, Content, ListItem, CheckBox, Left, Right, Icon, Body, Title } from 'native-base';
+
+export default class FormBuilder extends React.Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            formId: this.props.formId,
+            formName: this.props.formName,
+            fields: this.props.fields,
+        }
+        const data = this.state.fields
+        const formId = this.state.formId
+        const formName = this.state.formName
+        console.log(formId);
+        console.log(formName);
+        console.log('fields...');
+        console.log(data)
+    }
+
+    render() {
+        return (
+            <View style={{ flex: 1, margin: 10 }}>
+                <KeyboardAvoidingView style={{ flex: 1 }} behavior='position' keyboardVerticalOffset='50' enabled>
+                    <FlatList
+                        data={this.state.fields}
+                        extraData={this.state}
+                        keyExtractor={(row) => row.id}
+                        renderItem={(row) => this.renderItem(row)}
+                    />
+                </KeyboardAvoidingView>
+                {/* <KeyboardSpacer /> */}
+            </View>
+        );
+    }
+
+    renderItem = (row) => {
+        const item = row.item
+        switch (item.type) {
+            case 'Image':
+                return (
+                    <Field
+                        item={item}
+                        name={item.id}
+                        component={renderImageField}
+                    />
+                )
+            case 'Label':
+                return (
+                    <Field
+                        item={item}
+                        {...this.props}
+                        component={renderLabelField}
+                    />
+                )
+            case 'TextInput':
+                return (
+                    <Field
+                        item={item}
+                        name={item.id}
+                        label={item.label}
+                        validate={[maxLength15, minValue1]}
+                        component={renderFieldTextInput}
+                    />
+                )
+            case 'NumberInput':
+                return (
+                    <Field
+                        item={item}
+                        name={item.id}
+                        label={item.label}
+                        validate={number}
+                        warn={overRange}
+                        component={renderFieldNumberInput}
+                    />
+                )
+            case 'Password':
+                return (
+                    <Field
+                        keyboardType="default"
+                        label="Password: "
+                        name={item.id}
+                        validate={[required, number, minValue18]}
+                        warn={over70YearsOld}
+                        component={renderFieldTextInput}
+                    />
+                )
+            case 'Paragraph':
+                return (
+                    <Field
+                        item={item}
+                        component={renderParagraphField}
+                    />
+                )
+            // case 'Dropdown':
+            //     return (
+            //         <Field
+            //             item={item}
+            //             component={renderDropDownField}
+            //         />
+            //     )
+            case 'Picker':
+                return (
+                    <Field
+                        item={item}
+                        component={renderPickerField}
+                    />
+                )
+            case 'Camera':
+                return (
+                    <Field
+                        item={item}
+                        navigation={this.props.navigation}
+                        component={renderCameraField}
+                    />
+                )
+            case 'Separator':
+                return (
+                    <Field
+                        item={item}
+                        component={renderSeparatorField}
+                    />
+                )
+            case 'Submit':
+                return (
+                    <Field
+                        item={item}
+                        name={item.id}
+                        handleSubmit={this.props.handleSubmit}
+                        component={renderButtonField}
+                    />
+                )
+            default:
+                return null
+        }
+    }
+}
+
+const renderImageField = ({ item }) => {
+    const { width, height, center, src } = item;
+    return (
+        <View style={{
+            justifyContent: (center) ? 'center' : 'left',
+            alignItems: (center) ? 'center' : 'left',
+            padding: 10
+        }}>
+            <Image
+                style={{ width: Number(width), height: Number(height) }}
+                source={{ uri: src }}>
+            </Image>
+        </View>
+    );
+}
+
+const renderSeparatorField = ({ item }) => {
+    return (
+        <View
+            style={{
+                marginStart: 20,
+                marginEnd: 20,
+                marginTop: 20,
+                flex: 1,
+                borderBottomColor: '#808080',
+                borderBottomWidth: 1,
+            }}
+        />
+    )
+}
+
+const renderCameraField = ({ item, navigation, props }) => {
+
+    const [show, setShow] = useState(false)
+    const [imageData, setImageData] = useState()
+
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images
+        });
+        if (result.uri) {
+            setShow(true)
+            setImageData(result.uri)
+            console.log(result)
+        }
+    }
+
+    return (
+        <View style={{
+            flex: 1,
+            marginTop: 10,
+            marginStart: 20,
+            marginEnd: 20
+        }}>
+            <View style={{
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'space-between'
+            }}>
+                <Text style={{ color: '#505050', fontFamily: 'poppins-semibold', justifyContent: 'flex-start', fontSize: 13 }}>Photo</Text>
+                {
+                    show ? (
+                        <TouchableOpacity onPress={() => {
+                            setShow(false)
+                            setImageData('')
+                        }
+                        }>
+                            <Ionicons name={Platform.OS === "ios" ? "ios-close-circle-outline" : "md-close-circle-outline"} size={20} style={{ color: 'black', justifyContent: 'flex-end' }} />
+                        </TouchableOpacity>
+                    ) : null
+                }
+            </View>
+            {
+                show ? (
+                    <View style={{ flex: 1, borderRadius: 3, borderWidth: 1, flexDirection: 'row', height: 120 }}>
+                        <Image
+                            style={{ flex: 1, width: undefined, height: undefined }}
+                            source={{ uri: imageData }} />
+                    </View>
+                ) : <View style={
+                    {
+                        flex: 1,
+                        flexDirection: 'row',
+                        justifyContent: 'space-evenly',
+                        borderWidth: 1,
+                        borderColor: '#c0c0c0',
+                        marginTop: 4,
+                        marginBottom: 4,
+                        borderStyle: 'dashed',
+                        borderWidth: 1,
+                        borderRadius: 3,
+                    }}>
+                        <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+                            <TouchableOpacity onPress={() =>
+                                navigation.navigate('CameraHome', {
+                                    callBackMethod: (data) => {
+                                        console.log(props)
+                                        console.log('callback method called')
+                                        console.log(data)
+                                        setShow(true)
+                                        setImageData(data.uri)
+                                    }
+                                })
+                            }>
+                                <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignSelf: 'center' }}>
+                                    <FontAwesome
+                                        name="camera"
+                                        style={{ color: "#505050", fontSize: 65, flex: 1, marginStart: 10, marginTop: 10, marginEnd: 10 }}
+                                    />
+                                    {/* <Image style={{ width: 85, height: 80, flex: 1, marginStart: 10, marginTop: 10, marginEnd: 10 }}
+                                        source={{ uri: 'https://facebook.github.io/react-native/img/tiny_logo.png' }} /> */}
+                                    <Text style={{ justifyContent: 'center', alignSelf: 'center', color: '#505050', fontFamily: 'poppins-medium', marginTop: 4, marginBottom: 5 }}>Take Photo</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={{
+                            borderColor: '#c0c0c0',
+                            borderLeftWidth: 1,
+                            borderTopWidth: 0,
+                            borderBottomWidth: 0,
+                            borderRightWidth: 0,
+                            borderStyle: 'dotted',
+                            borderRadius: 2,
+                            marginTop: 14,
+                            marginBottom: 14,
+                            flexDirection: 'column'
+                        }}
+                        />
+                        <View style={{ flex: 1 }}>
+                            <TouchableOpacity onPress={() =>
+                                pickImage()
+                            }>
+                                <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignSelf: 'center' }}>
+                                    <FontAwesome
+                                        name="image"
+                                        style={{ color: "#505050", fontSize: 65, flex: 1, marginStart: 10, marginTop: 10, marginEnd: 10 }}
+                                    />
+                                    {/* <Image style={{ width: 85, height: 80, flex: 1, marginStart: 10, marginTop: 10, marginEnd: 10 }}
+                                        source={{ uri: 'https://facebook.github.io/react-native/img/tiny_logo.png' }} /> */}
+                                    <Text style={{ justifyContent: 'center', alignSelf: 'center', color: '#505050', fontFamily: 'poppins-medium', marginTop: 4, marginBottom: 5 }}>From Gallery</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                        {/* <Image style={{ width: 50, height: 100, flex: 1, marginStart: 10, marginTop: 10, marginBottom: 10, marginEnd: 10 }} */}
+                        {/* source={{ uri: 'https://facebook.github.io/react-native/img/tiny_logo.png' }} /> */}
+                    </View>
+            }
+        </View >
+    );
+}
+
+const renderLabelField = ({ item }) => {
+    const { content } = item;
+    console.log('label value');
+    console.log(item.props.marginStart)
+    return (
+        <View style={{ marginStart: item.props.marginStart }}>
+            <HTML html={content} imagesMaxWidth={Dimensions.get('window').width} />
+        </View>
+    )
+}
+
+const renderParagraphField = ({ item }) => {
+    const { content } = item;
+    console.log('label value');
+    console.log(item.props.marginStart)
+    return (
+        <View style={{ marginStart: item.props.marginStart }}>
+            <HTML html={content} imagesMaxWidth={Dimensions.get('window').width} />
+        </View>
+    )
+}
+
+const renderPickerField = ({ item, }) => {
+    const deviceWidth = Dimensions.get('window').width;
+    const [value, setValue] = useState(item.label)
+
+    const updateValue = (value) => {
+        const newValue = value
+        setValue(newValue)
+    }
+
+    return (
+        <View style={{ marginStart: 20, marginEnd: 20, marginTop: 10, backgroundColor: 'whitesmoke', borderRadius: 3 }}>
+            <Picker
+                style={{ fontFamily: 'poppins-medium', color: '#505050' }}
+                itemStyle={{ fontFamily: 'poppins-medium' }}
+                selectedValue={value}
+                mode={item.mode}
+                onValueChange={(value) => updateValue(value)}>
+                {
+                    item.options.map((item, index) => (
+                        <Picker.Item key={index} label={item.name} value={item.name} style={{ fontFamily: 'poppins-medium' }} />
+                    ))
+                }
+            </Picker>
+        </View>
+    )
+}
+
+const renderDropDownField = ({ item }) => {
+    const [modalVisible, setModalVisible] = useState(false);
+    const deviceWidth = Dimensions.get('window').width;
+
+    const toggleModalVisible = () => {
+        const newValue = !modalVisible
+        setModalVisible(newValue)
+    }
+
+    const toggleSelect = (value) => {
+        const newSelected = item.multiple ? item.value : value;
+        if (item.multiple) {
+            const index = item.objectType ? newSelected.findIndex(option =>
+                option[item.primaryKey] === value[item.primaryKey]
+            ) : newSelected.indexOf(value);
+            if (index === -1) {
+                newSelected.push(value);
+            } else {
+                newSelected.splice(index, 1);
+            }
+        }
+        const modalVisible = item.multiple ? modalVisible : false
+        setModalVisible(modalVisible)
+    }
+
+    const selectedText = item.multiple ?
+        item.options.length || 'None' :
+        item.objectType ?
+            (item.options && item.options[item.labelKey]) || 'None'
+            : item.options || 'None';
+
+    return (
+        <View>
+            <ListItem icon onPress={() => toggleModalVisible()}>
+                <Body>
+                    <Text style={{ fontFamily: 'poppins-medium' }}>{item.label}</Text>
+                </Body>
+                <Right>
+                    <View style={{ width: deviceWidth / 2, alignItems: 'flex-end' }}>
+                        <Text numberOfLines={1} ellipSizeMode="tail">{selectedText}</Text>
+                    </View>
+
+                    <Icon name="ios-arrow-forward" />
+                </Right>
+            </ListItem>
+            {/* <View style={{ paddingHorizontal: 15 }}>
+                <ErrorComponent {...{ item }} />
+            </View> */}
+            <Modal
+                visible={modalVisible}
+                animationType="none"
+                onRequestClose={() => toggleModalVisible()}
+            >
+                <Container style={{ flex: 1 }}>
+                    <Header>
+                        <Left>
+                            <Button
+                                transparent
+                                onPress={() => toggleModalVisible()}
+                            >
+                                <Icon name="arrow-back" />
+                            </Button>
+                        </Left>
+                        <Body>
+                            <Title>{item.label || 'Select'}</Title>
+                        </Body>
+                        <Right />
+                    </Header>
+                    <Content>
+                        {
+                            item.options.map((item, index) => {
+                                let isSelected = false;
+                                if (item.multiple) {
+                                    isSelected = item.objectType ?
+                                        item.value.findIndex(option =>
+                                            option[item.primaryKey] === item[item.primaryKey]
+                                        ) !== -1 : (item.value.indexOf(item) !== -1);
+                                }
+                                return (
+                                    <ListItem
+                                        key={index}
+                                        onPress={() => toggleSelect(item)}
+                                    >
+                                        {item.multiple &&
+                                            <CheckBox
+                                                onPress={() => toggleSelect(item)}
+                                                checked={isSelected}
+                                            />
+                                        }
+                                        <Body>
+                                            <Text style={{ paddingHorizontal: 5 }}>
+                                                {item.objectType ? item[item.labelKey] : item}
+                                            </Text>
+                                        </Body>
+                                    </ListItem>);
+                            })
+                        }
+                    </Content>
+                </Container>
+            </Modal>
+        </View>
+    );
+}
+
+const renderFieldTextInput = ({ label, keyboardType, meta: { touched, error, warning }, input: { onChange, ...restInput } }) => {
+    return (
+        <View>
+            <Text style={{
+                flex: 1, marginTop: 10, color: '#404040',
+                fontSize: 10, fontFamily: 'poppins-semibold',
+                marginStart: 20
+            }}>{label}</Text>
+            <View style={{
+                flex: 1, marginStart: 20, marginEnd: 20,
+                flexDirection: 'row', height: 50, alignItems: 'center', justifyContent: 'center'
+            }}>
+                <TextInput style={{
+                    height: 44,
+                    padding: 5,
+                    borderWidth: 1,
+                    borderColor: 'grey',
+                    borderRadius: 3,
+                    marginBottom: 10,
+                    flex: 3,
+                    marginTop: 10,
+                }}
+                    keyboardType={keyboardType}
+                    onChangeText={onChange} {...restInput}
+                >
+                </TextInput>
+            </View>
+            <View style={{ marginStart: 20, marginEnd: 20 }}>
+                {touched && ((error && <Text style={{ color: 'red', fontFamily: 'poppins-medium', fontSize: 9 }}>{error}</Text>) ||
+                    (warning && <Text style={{ color: 'orange' }}>{warning}</Text>))}
+            </View>
+        </View>
+    );
+};
+
+const renderFieldNumberInput = ({ label, keyboardType, meta: { touched, error, warning }, input: { onChange, ...restInput } }) => {
+    return (
+        <View>
+            <Text style={{
+                flex: 1, marginTop: 10, color: '#404040',
+                fontSize: 10, fontFamily: 'poppins-semibold',
+                marginStart: 20
+            }}>{label}</Text>
+            <View style={{
+                flex: 1, marginStart: 20, marginEnd: 20,
+                flexDirection: 'row', height: 50, alignItems: 'center', justifyContent: 'center'
+            }}>
+                <TextInput style={{
+                    height: 44,
+                    padding: 5,
+                    borderWidth: 1,
+                    borderColor: 'grey',
+                    borderRadius: 3,
+                    marginBottom: 10,
+                    flex: 3,
+                    marginTop: 10,
+                }}
+                    keyboardType={keyboardType}
+                    onChangeText={onChange} {...restInput}
+                >
+                </TextInput>
+            </View>
+            <View style={{ marginStart: 20, marginEnd: 20 }}>
+                {touched && ((error && <Text style={{ color: 'red', fontFamily: 'poppins-medium', fontSize: 9 }}>{error}</Text>) ||
+                    (warning && <Text style={{ color: 'orange' }}>{warning}</Text>))}
+            </View>
+        </View>
+    );
+};
+
+const renderButtonField = ({ item, handleSubmit }) => {
+    const name = item.name;
+    console.log('button field');
+    console.log(name)
+    console.log(handleSubmit);
+    return (
+        <TouchableOpacity onPress={
+            handleSubmit((values) => {
+                console.log(values)
+                alert(`Values = ~${JSON.stringify(values)}`);
+            })
+            // SubmitData
+        }
+            style={{ margin: 10, alignItems: 'center' }}>
+            <Text style={{
+                backgroundColor: 'steelblue', color: 'white', fontSize: 16,
+                width: 110, textAlign: 'center', padding: 5, borderRadius: 2, fontFamily: 'poppins-semibold'
+            }}>{item.name}</Text>
+        </TouchableOpacity>
+    )
+}
+
+const SubmitData = async () => {
+    var jsonData = {}
+    var form_data = []
+    jsonData.form_data = form_data
+    var field = {
+        "id": '',
+        "name": ''
+    }
+    jsonData.form_data.push(field)
+    // try {
+    //     const response = await fetch('http://172.29.32.36:7090//api/v1/save/form/user/data', {
+    //         method: 'POST',
+    //         headers: {
+    //             Accept: 'application/json',
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(jsonData),
+    //     });
+    //     const responseJson = await response.json();
+    //     console.log(responseJson)
+    //     // this.setState({
+    //     //     fields: responseJson.form_data
+    //     // })
+    // }
+    // catch (error) {
+    //     console.error(error);
+    // }
+};
+
+
+
+//Validation
+const required = value => value ? undefined : 'Required';
+const maxLength15 = value => value && value.length > 15 ? `Must be 15 characters or less` : undefined;
+const number = value => value && isNaN(Number(value)) ? 'Must be a number' : undefined;
+const minValue = min => value =>
+    value && value < min ? `Must be at least ${min}` : undefined;
+const minValue1 = minValue(1);
+const isValidEmail = value =>
+    value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ? 'Invalid email address' : undefined;
+//Warning
+const overRange = value =>
+    value && value > 999 ? 'Number should not be greater than 999' : undefined;
+const isYahooMail = value =>
+    value && /.+@yahoo\.com/.test(value) ? 'Really? You still use yahoo mail ?' : undefined;
+
+const Item = Picker.Item;
+
+const deviceWidth = Dimensions.get('window').width;
+
